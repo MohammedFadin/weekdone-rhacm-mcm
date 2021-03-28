@@ -11,4 +11,4 @@ spec:
   selector:
     app.kubernetes.io/instance: weekdone-client
     app.kubernetes.io/name: weekdone-client
-  type: NodePort
+  type: ClusterIP
