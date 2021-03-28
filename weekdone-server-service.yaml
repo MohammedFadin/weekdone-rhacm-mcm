@@ -4,6 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: weekdone-server
     app.kubernetes.io/name: weekdone-server
+  name: weekdone-server
 spec:
   ports:
   - name: http
@@ -13,5 +14,4 @@ spec:
   selector:
     app.kubernetes.io/instance: weekdone-server
     app.kubernetes.io/name: weekdone-server
-  sessionAffinity: None
   type: ClusterIP

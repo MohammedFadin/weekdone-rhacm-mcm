@@ -1,9 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app.kubernetes.io/instance: weekdone-client
-    app.kubernetes.io/name: weekdone-client
+  name: weekdone-client
 spec:
   ports:
   - name: http
@@ -13,5 +11,4 @@ spec:
   selector:
     app.kubernetes.io/instance: weekdone-client
     app.kubernetes.io/name: weekdone-client
-  sessionAffinity: None
   type: NodePort
