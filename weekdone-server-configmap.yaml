@@ -7,4 +7,3 @@ data:
 kind: ConfigMap
 metadata:
   name: weekdone-server-configmap
-  namespace: weekdone-dev
