@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+  name: weekdone-client
+  namespace: weekdone-dev
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: weekdone-client
+      app.kubernetes.io/name: weekdone-client
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: weekdone-client
+        app.kubernetes.io/name: weekdone-client
+    spec:
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: weekdone-client-configmap
+        image: moefadin/weekdone-client:d10e71c4
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /live
+            port: http
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: weekdone-client
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ready
+            port: http
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 60m
+            memory: 128Mi
+          requests:
+            cpu: 30m
+            memory: 128Mi
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30

@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  MONGO_DB: weekdone-reviews
+  MONGO_HOST: weekdone-mongo-mongodb
+  MONGO_PORT: "27017"
+  SERVER_PORT: "4000"
+kind: ConfigMap
+metadata:
+  name: weekdone-server-configmap
+  namespace: weekdone-dev
